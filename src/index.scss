@@ -40,49 +40,6 @@ header {
   gap: 40px;
 }
 
-.card {
-  border: 1px solid #F3F3F3;
-  border-radius: 40px;
-  padding: 30px;
-  width: 220px;
-  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
-    transform: translateY(-5px);
-  }
-
-  .favorite {
-    position: absolute;
-    cursor: pointer;
-  } 
-
-  h5 {
-    font-size: 14px;
-    font-weight: 400;
-  }
-
-  span {
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 13px;
-    text-transform: uppercase;
-
-    color: #BDBDBD;
-  }
-}
-
-.button {
-  width: 32px;
-  height: 32px;
-
-  background: #FFFFFF;
-  border: 1px solid #F2F2F2;
-  box-sizing: border-box;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .search {
   width: 250px;
   height: 45px;
@@ -96,7 +53,7 @@ header {
     border: 0;
     font-size: 14px;
     line-height: 17px;
-    color: #c5c5c5;
+    color: #9fa1a0;
   }
 }
 
@@ -119,6 +76,7 @@ header {
   height: 100%;
   right: 0;
   top: 0;
+  transition: 0.5s;
 
   background: #FFFFFF;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
