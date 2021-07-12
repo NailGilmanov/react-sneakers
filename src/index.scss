@@ -59,22 +59,23 @@ header {
 
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   z-index: 9;
+  transition: 0.5s;
 }
 
 .drawer {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   width: 420px;
   height: 100%;
-  right: 0;
+  right: 0px;
   top: 0;
   transition: 0.5s;
 
@@ -134,27 +135,42 @@ header {
         margin: 0 10px;
       }
     }
+  
+  }
+}
+
+.greenButton {
+  background: #9DD558;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  border: 0;
+  color: white;
+  width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background-color: lighten(#9DD558, 5%);
   }
 
-  button {
-    background: #9DD558;
-    border-radius: 18px;
-    padding: 18px;
-    text-align: center;
-    border: 0;
-    color: white;
-    width: 100%;
-    font-weight: 600;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.1s ease-in-out;
+  &:active {
+    background-color: darken(#9DD558, 5%);
+  }
+}
 
-    &:hover {
-      background-color: lighten(#9DD558, 5%);
-    }
+.cartEmpty {
+  text-align: center;
 
-    &:active {
-      background-color: darken(#9DD558, 5%);
-    }
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./Card.module.scss"
 
-function Card({ name, price, img, onFavorite, onPlus }) {
+function Card({ id, name, price, img, onFavorite, onPlus }) {
     const [isAdded, setIsAdded] = React.useState(false);
 
     const handleClick = () => {
