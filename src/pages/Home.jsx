@@ -1,11 +1,35 @@
+import React from 'react'
 import Card from '../components/Card/Card'
+import AppContext from '../context'
 
 function Home({sneakers,
+    cartItems,
     searchValue,
     onChangeSeacrhInput,
     onAddToFavorite,
-    onAddToCart
+    onAddToCart,
+    isLoading
 }) {
+
+    const { isItemAdded } = React.useContext(AppContext);
+
+    const renderItems = () => {
+        return (
+            isLoading
+                ? [...Array(10)]
+                : sneakers.filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
+        ).map((obj, index) => (
+            < Card
+                key={index}
+                onFavorite={onAddToFavorite}
+                onPlus={onAddToCart}
+                loading={isLoading}
+                {...obj}
+            />
+        ))
+    }
+
+
     return (
         <div className="content p-40">
             <div className="d-flex justify-between flex-wrap mb-40">
@@ -16,19 +40,7 @@ function Home({sneakers,
                 </div>
             </div>
                 <div className='card-wrap'>
-                    {sneakers
-                        .filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
-                        .map((obj) => (
-                            < Card 
-                                key={obj.id}
-                                name={obj.name}
-                                price={obj.price}
-                                img={obj.img}
-                                onFavorite={onAddToFavorite}
-                                onPlus={onAddToCart}
-                                favorited={false}
-                            />
-                    ))}
+                    {renderItems()}
                 </div>
         </div>
     )

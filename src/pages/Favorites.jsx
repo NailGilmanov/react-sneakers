@@ -1,13 +1,18 @@
-import Card from '../components/Card/Card'
+import React  from 'react';
 
-function Favorites({ items, onAddToFavorite, onAddToCart }) {
+import Card from '../components/Card/Card'
+import AppContext from '../context';
+
+function Favorites({ onAddToFavorite, onAddToCart }) {
+    const { favorite } = React.useContext(AppContext)
+
     return (
         <div className="content p-40">
             <div className="d-flex justify-between flex-wrap mb-40">
                 <h1>Мои закладки.</h1>
             </div>
             <div className='card-wrap'>
-                {items.map((obj) => (
+                {favorite.map((obj) => (
                         < Card 
                             key={obj.id}
                             name={obj.name}

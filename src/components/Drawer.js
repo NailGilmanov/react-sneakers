@@ -1,6 +1,13 @@
 import React from 'react'
+import Info from './Info';
 
 function Drawer({items=[], onClose, price, onRemove}) {
+    const [isOrderCompleted, setOrderIsCompleted] = React.useState(false);
+
+    const onClickOrder = () => {
+      setOrderIsCompleted(true)
+    }
+
     return (
         <div className="overlay">
         <div className="drawer">
@@ -14,7 +21,7 @@ function Drawer({items=[], onClose, price, onRemove}) {
             <>
               <div className="cartWrap">
                 {items.map((obj) => (
-                  <div className="cartItem d-flex mb-20" key={obj.id}>
+                  <div key={obj.id} className="cartItem d-flex mb-20" key={obj.id}>
                     <img className='mr-15' width={70} height={70} src={obj.img} alt="sneakers" />
                     <div className="cartItem-content">
                       <p>{obj.name}</p>
@@ -38,20 +45,18 @@ function Drawer({items=[], onClose, price, onRemove}) {
                     <b>{Math.round(price * 0.95)} руб.</b>
                   </li>
                 </ul>
-                <button className="greenButton">Оформить заказ</button>
+                <button onClick={onClickOrder} className="greenButton">Оформить заказ</button>
               </div>
             </> 
               
               : 
           
-            <div className="cartEmpty d-flex align-center justify-center flex-column flex">
-              <img className='mb-20' width={120} height={120} src="/img/empty-cart.png" alt="empty" />
-              <h2>Корзина пустая</h2>
-              <p className='opacity-6'>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-              <button className="greenButton" onClick={onClose}>
-                Вернуться назад.
-              </button>
-            </div>
+            <Info 
+              onClick={onClose} 
+              title='Корзина пустая' 
+              image='/img/empty-cart.png' 
+              description='Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
+            />
           }
 
         </div>
