@@ -1,49 +1,51 @@
-import React from 'react'
-import Card from '../components/Card/Card'
-import AppContext from '../context'
+import React from 'react';
 
-function Home({sneakers,
-    cartItems,
-    searchValue,
-    onChangeSeacrhInput,
-    onAddToFavorite,
-    onAddToCart,
-    isLoading
+import Card from '../components/Card';
+
+function Home({
+  items,
+  searchValue,
+  setSearchValue,
+  onChangeSearchInput,
+  onAddToFavorite,
+  onAddToCart,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const filtredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
+      <Card
+        key={index}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
 
-    const { isItemAdded } = React.useContext(AppContext);
-
-    const renderItems = () => {
-        return (
-            isLoading
-                ? [...Array(10)]
-                : sneakers.filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
-        ).map((obj, index) => (
-            < Card
-                key={index}
-                onFavorite={onAddToFavorite}
-                onPlus={onAddToCart}
-                loading={isLoading}
-                {...obj}
+  return (
+    <div className="content p-40">
+      <div className="d-flex align-center justify-between mb-40">
+        <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
+        <div className="search-block d-flex">
+          <img src="img/search.svg" alt="Search" />
+          {searchValue && (
+            <img
+              onClick={() => setSearchValue('')}
+              className="clear cu-p"
+              src="img/btn-remove-active.svg"
+              alt="Clear"
             />
-        ))
-    }
-
-
-    return (
-        <div className="content p-40">
-            <div className="d-flex justify-between flex-wrap mb-40">
-                <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}</h1>
-                <div className="search d-flex align-center">
-                    <img className='mr-10' src="/img/search.svg" alt="search" />
-                    <input onChange={onChangeSeacrhInput} value={searchValue} type="text" placeholder='Поиск...'/>
-                </div>
-            </div>
-                <div className='card-wrap'>
-                    {renderItems()}
-                </div>
+          )}
+          <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..." />
         </div>
-    )
+      </div>
+      <div className="d-flex flex-wrap">{renderItems()}</div>
+    </div>
+  );
 }
 
 export default Home;
