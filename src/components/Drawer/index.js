@@ -17,7 +17,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post('/orders', {
+      const { data } = await axios.post('https://60e9f2995dd7ff0017b39725.mockapi.io/orders', {
         items: cartItems,
       });
       setOrderId(data.id);
@@ -26,7 +26,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete('/cart/' + item.id);
+        await axios.delete('https://60e9f2995dd7ff0017b39725.mockapi.io/cart/' + item.id);
         await delay(1000);
       }
     } catch (error) {
@@ -90,7 +90,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                 ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
                 : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
             }
-            image={isOrderComplete ? 'img/complete-order.png' : 'img/empty-cart.png'}
+            image={isOrderComplete ? 'img/complete-order.jpg' : 'img/empty-cart.png'}
           />
         )}
       </div>
