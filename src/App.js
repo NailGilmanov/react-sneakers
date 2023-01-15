@@ -144,7 +144,7 @@ function App() {
         setCartItems,
       }}>
       <MediaQuery maxWidth={920}>  
-          <button class="button" onClick={() => setCartOpened(true)}>
+          <button class="button1" onClick={() => setCartOpened(true)}>
             <img src="img/cart.svg" alt="Корзина" />
           </button>
       </MediaQuery>
