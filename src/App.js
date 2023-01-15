@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Drawer from './components/Drawer';
 import AppContext from './context';
 
+import MediaQuery from "react-responsive";
+
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
@@ -141,6 +143,11 @@ function App() {
         setCartOpened,
         setCartItems,
       }}>
+      <MediaQuery maxWidth={920}>  
+          <button class="button" onClick={() => setCartOpened(true)}>
+            <img src="img/cart.svg" alt="Корзина" />
+          </button>
+      </MediaQuery>
       <div className="wrapper clear">
         <Drawer
           items={cartItems}
