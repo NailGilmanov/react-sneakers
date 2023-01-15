@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, CSSProperties } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 
+import ClipLoader from "react-spinners/ClipLoader";
+
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
@@ -16,6 +18,19 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
+
+  const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(()=> {
+            setLoading(false)
+        }, 1500)
+    },[])
+
+    const style_loader: React.CSSProperties = {
+        display: "block",
+        margin: "300px auto",
+      };
 
   React.useEffect(() => {
     async function fetchData() {
@@ -103,6 +118,18 @@ function App() {
   };
 
   return (
+    <>
+
+    {
+    loading ? <ClipLoader
+            color="#000000"
+            loading={loading}
+            size={50}
+            cssOverride={style_loader}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          /> 
+      :
     <AppContext.Provider
       value={{
         items,
@@ -146,6 +173,8 @@ function App() {
         </Route>
       </div>
     </AppContext.Provider>
+    } 
+    </>
   );
 }
 
